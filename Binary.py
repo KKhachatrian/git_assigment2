@@ -18,29 +18,62 @@ def hexadecimal_to_desyatkovuy(number):
     except ValueError:
         return None
 
+def bit_to_hexadecimal(number):
+    bit = number
+    try:
+        result = hex(int(bit, 2))
+        return result
+    except ValueError:
+        return None
+
+def desyatkovuy_to_hex(number):
+    result = hex(int(number))
+    return result
+
 def convertaciya():
     while True:
         number = input("Введіть число:")
 
         if number.startswith("0b"):
-            desyatkove = bit_to_desyatkovuy(number)
-            if number is not None:
-                changed_number = print(f"Число у десятковому вигляді: {desyatkove}")
-            else:
-                changed_number = print("Введено неправильно двійкове число.")
+            system = input("В яку систему числення хочете перевести(hex,decimal):")
+            if system == "hex":
+                hexadecimal = bit_to_hexadecimal(number)
+                if number is not None:
+                    changed_number = print(f"Число у  шістнадцятковом вигляді: {hexadecimal}")
+                else:
+                    changed_number = print("Введено неправильно двійкове число.")
+            elif system == "decimal":
+                desyatkove = bit_to_desyatkovuy(number)
+                if number is not None:
+                    changed_number = print(f"Число у десятковому вигляді: {desyatkove}")
+                else:
+                    changed_number = print("Введено неправильно двійкове число.")
 
         elif number.startswith("0x"):
-            desyatkove = hexadecimal_to_desyatkovuy(number)
-            if number is not None:
-                changed_number = print(f"Число у десятковому вигляді: {desyatkove}")
-            else:
-                changed_number = print("Введено неправильно шістнадцяткове число.")
+            system = input("В яку систему числення хочете перевести(bit,decimal):")
+            if system == "bit":
+                bit = desyatcovuy_to_bit(hexadecimal_to_desyatkovuy(number))
+                if number is not None:
+                    changed_number = print(f"Число у двійковому вигляді: {bit}")
+                else:
+                    changed_number = print("Введено неправильно шістнадцяткове число.")
+            elif system == "decimal":
+                desyatkove = hexadecimal_to_desyatkovuy(number)
+                if number is not None:
+                    changed_number = print(f"Число у десятковому вигляді: {desyatkove}")
+                else:
+                    changed_number = print("Введено неправильно шістнадцяткове число.")
 
         else:
             try:
                 desyatkove = int(number)
-                bit = desyatcovuy_to_bit(number)
-                changed_number = print(f"Число у двійковому вигляді: {bit}")
+                system = input("В яку систему числення хочете перевести(bit,hex):")
+                if system == "hex":
+                    hexadecimal = desyatkovuy_to_hex()
+                    changed_number = print(f"Число у шістнадцятковом вигляді: {hexadecimal}")
+                elif system == "bit":
+                    bit = desyatcovuy_to_bit(number)
+                    changed_number = print(f"Число у двійковому вигляді: {bit}")
             except ValueError:
                 changed_number = print("Введено неправильно десяткове число.")
 
@@ -48,5 +81,6 @@ def convertaciya():
         if repeat == 'ні':
             print("Робота завершена.")
             break
+
 
 convertaciya()
