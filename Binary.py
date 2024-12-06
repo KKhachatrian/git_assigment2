@@ -5,7 +5,15 @@ def desyatcovuy_to_bit(number) :
 def bit_to_desyatkovuy(number):
     bit = number
     try:
-        result=int(bit, 2)
+        result = int(bit, 2)
+        return result
+    except ValueError:
+        return None
+
+def hexadecimal_to_desyatkovuy(number):
+    hex = number
+    try:
+        result = int(hex, 2)
         return result
     except ValueError:
         return None
@@ -20,6 +28,13 @@ def convertaciya():
                 changed_number = print(f"Число у десятковому вигляді: {desyatkove}")
             else:
                 changed_number = print("Введено неправильно двійкове число.")
+
+        elif number.startswith("0x"):
+            desyatkove = hexadecimal_to_desyatkovuy(number)
+            if number is not None:
+                changed_number = print(f"Число у десятковому вигляді: {desyatkove}")
+            else:
+                changed_number = print("Введено неправильно шістнадцяткове число.")
 
         else:
             try:
